@@ -7,6 +7,9 @@ T.O.C.
  2.   Building for Ubuntu desktop
  2.1. Minimum Requirements
  2.2. Building the Repository
+ 3.   Building for Windows
+ 3.1. Building with CMake
+ 4.   Building for MacOS
 
 
 
@@ -88,3 +91,22 @@ vcpkg-script folder in the windows-dependencies repository.
     $ cmake -g Ninja . -DCMAKE_TOOLCHAIN_FILE=%VCPKG_FOLDER%/vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_INSTALL_PREFIX=%DALI_ENV_FOLDER%
 
     $ cmake --build . --target install
+
+4. Building for MacOS
+=====================
+
+Here it is expected that the environment variables are set accordingly to
+`dali-core/README.md`.
+
+To build the repository enter the 'build/tizen' folder:
+```bash
+    $ cd dali-csharp-binder/build/tizen
+```
+Then run the following command to set up the build:
+```bash
+    $ cmake -DCMAKE_INSTALL_PREFIX=$DESKTOP_PREFIX -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -Wno-dev -DCMAKE_TOOLCHAIN_FILE=$VCPKG_FOLDER/vcpkg/scripts/buildsystems/vcpkg.cmake
+```
+To build run:
+```bash
+    $ make install -j8
+```

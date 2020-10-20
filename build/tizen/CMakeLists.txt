@@ -5,25 +5,32 @@ set(CMAKE_C_STANDARD 99)
 
 set(name "dali2-csharp-binder")
 
-project(${name} CXX)
+project(${name} C CXX)
 
 set(${name}_VERSION_MAJOR 2)
 set(${name}_VERSION_MINOR 0)
 set(${name}_VERSION_PATCH 0)
 set(${name}_VERSION ${${name}_VERSION_MAJOR}.${${name}_VERSION_MINOR}.${${name}_VERSION_PATCH})
 
-add_definitions(-DDALI_PROFILE_WINDOWS)
-add_compile_options( /FIdali-windows-dependencies.h ) # Adds missing definitions.
-add_compile_options( /vmg ) # Avoids a 'reinterpret_cast' compile error while compiling signals and callbacks.
-add_compile_options( /wd4251 ) # Ignores warning C4251: "'identifier' : class 'type' needs to have dll-interface to be used by clients of class 'type2'"
+IF (WIN32)
+  add_definitions(-DDALI_PROFILE_WINDOWS)
+  add_compile_options( /FIdali-windows-dependencies.h ) # Adds missing definitions.
+  add_compile_options( /vmg ) # Avoids a 'reinterpret_cast' compile error while compiling signals and callbacks.
+  add_compile_options( /wd4251 ) # Ignores warning C4251: "'identifier' : class 'type' needs to have dll-interface to be used by clients of class 'type2'"
+ENDIF()
 
 add_definitions(-D_USE_MATH_DEFINES)
 
 set(VCPKG_INCLUDE_DIR "${_VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/include")
 
-find_package( pthreads REQUIRED )
+IF (NOT APPLE)
+  find_package( pthreads REQUIRED )
+  find_library( GETOPT_LIBRARY NAMES getopt )
+  find_package( unofficial-fontconfig REQUIRED )
+  find_package( unofficial-cairo REQUIRED )
+ENDIF()
+
 find_package( curl REQUIRED )
-find_library( GETOPT_LIBRARY NAMES getopt )
 find_library( EXIF_LIBRARY NAMES libexif )
 
 find_package( png REQUIRED )
@@ -31,17 +38,18 @@ find_package( gif REQUIRED )
 find_package( jpeg REQUIRED )
 find_library( TURBO_JPEG_LIBRARY NAMES turbojpeg )
 
-find_package( unofficial-fontconfig REQUIRED )
 find_package( freetype REQUIRED )
 find_package( harfbuzz REQUIRED )
 find_library( FRIBIDI_LIBRARY NAMES fribidi )
 
 find_package( unofficial-angle REQUIRED )
-find_package( unofficial-cairo REQUIRED )
 
 find_package( WebP REQUIRED )
 
-find_package( dali-windows-dependencies REQUIRED )
+IF (WIN32)
+  find_package( dali-windows-dependencies REQUIRED )
+ENDIF()
+
 find_package( dali2-core REQUIRED )
 find_package( dali2-adaptor REQUIRED )
 find_package( dali2-toolkit REQUIRED )
@@ -52,28 +60,33 @@ set( LIB_DIR ${CMAKE_INSTALL_PREFIX}/lib )
 set( BIN_DIR ${CMAKE_INSTALL_PREFIX}/bin )
 
 set( REQUIRED_LIBS
-  PThreads4W::PThreads4W
   CURL::libcurl
-  ${GETOPT_LIBRARY}
   ${EXIF_LIBRARY}
   ${PNG_LIBRARIES}
   ${GIF_LIBRARIES}
   JPEG::JPEG
   ${TURBO_JPEG_LIBRARY}
-  unofficial::fontconfig::fontconfig
   Freetype::Freetype
   harfbuzz::harfbuzz
   ${FRIBIDI_LIBRARY}
   unofficial::angle::libEGL
   unofficial::angle::libGLESv2
-  unofficial::cairo::cairo
   WebP::webp
   WebP::webpdemux
-  dali-windows-dependencies::dali-windows-dependencies
   dali2-core::dali2-core
   dali2-adaptor::dali2-adaptor
   dali2-toolkit::dali2-toolkit
 )
+
+IF (NOT APPLE)
+  set(REQUIRED_LIBS
+    PThreads4W::PThreads4W
+    ${GETOPT_LIBRARY}
+    unofficial::fontconfig::fontconfig
+    unofficial::cairo::cairo
+    dali-windows-dependencies::dali-windows-dependencies
+  )
+ENDIF()
 
 include_directories(
   ${VCPKG_INCLUDE_DIR}
