@@ -864,9 +864,6 @@ SWIGEXPORT void* SWIGSTDCALL CSharp_Dali_Capture_GetNativeImageSource(void* jarg
   return (void*)handle;
 }
 
-typedef char * (SWIGSTDCALL* SWIG_CSharpStringHelperCallback)(const char *);
-extern SWIG_CSharpStringHelperCallback SWIG_csharp_string_callback;
-
 SWIGEXPORT char* SWIGSTDCALL CSharp_Dali_Capture_GenerateUrl(void* nuiCapture)
 {
   Dali::Capture* capture = (Dali::Capture*)nuiCapture;

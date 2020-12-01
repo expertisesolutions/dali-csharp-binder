@@ -22,11 +22,6 @@
 #include <dali/public-api/watch/watch-time.h>
 #include <dali/public-api/watch/watch-application.h>
 
-/* Callback for returning strings to C# without leaking memory */
-typedef char * (SWIGSTDCALL* SWIG_CSharpStringHelperCallback)(const char *);
-extern SWIG_CSharpStringHelperCallback SWIG_csharp_string_callback;
-
-
 // keep argcs and argv so they're always available to DALi
 int argWatchC = 1;
 char **argWatchV = NULL;

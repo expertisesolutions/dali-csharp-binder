@@ -415,9 +415,6 @@ void SWIG_CSharpException(int code, const char *msg) {
 
 #include <stdexcept>
 
-
-#define SWIGSTDCALL
-
 #include <time.h>
 
 #include <dali/dali.h>
@@ -57165,10 +57162,10 @@ SWIGEXPORT void SWIGSTDCALL CSharp_Dali_delete_WidgetApplication(void * jarg1) {
 }
 
 
-typedef Dali::Widget*(SWIGSTDCALL *CSharpCreateWidgetFunction)(const std::string&);
+typedef Dali::Widget*(*CSharpCreateWidgetFunction)(const std::string&);
 CSharpCreateWidgetFunction _CSharpCreateWidgetFunction = NULL;
 
-static Dali::Widget SWIGSTDCALL WidgetFactoryFunction( const std::string& widgetName )
+static Dali::Widget WidgetFactoryFunction( const std::string& widgetName )
 {
   Widget* widget = _CSharpCreateWidgetFunction( widgetName.c_str() );
   return *widget;

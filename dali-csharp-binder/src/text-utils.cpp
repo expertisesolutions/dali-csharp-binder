@@ -22,8 +22,6 @@
 #include <dali/dali.h>
 #include <dali-toolkit/devel-api/text/text-utils-devel.h>
 
-extern SWIG_CSharpStringHelperCallback SWIG_csharp_string_callback;
-
 #ifdef __cplusplus
 extern "C" {
 #endif

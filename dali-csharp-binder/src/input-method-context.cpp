@@ -23,11 +23,6 @@
 #include <dali/devel-api/common/stage.h>
 #include <dali/integration-api/debug.h>
 
-/* Callback for returning strings to C# without leaking memory */
-typedef char * (SWIGSTDCALL* SWIG_CSharpStringHelperCallback)(const char *);
-extern SWIG_CSharpStringHelperCallback SWIG_csharp_string_callback;
-
-
 SWIGINTERN bool Dali_Signal_Sl_void_Sp_Dali_InputMethodContext_SA__SP__Sg__Empty(Dali::Signal< void (Dali::InputMethodContext &) > const *self){
   return self->Empty();
 }

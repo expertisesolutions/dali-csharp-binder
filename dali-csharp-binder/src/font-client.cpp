@@ -25,11 +25,6 @@
 #include <dali/devel-api/text-abstraction/text-abstraction-definitions.h>
 #include <dali/devel-api/text-abstraction/font-client.h>
 
-/* Callback for returning strings to C# without leaking memory */
-typedef char * (SWIGSTDCALL* SWIG_CSharpStringHelperCallback)(const char *);
-extern SWIG_CSharpStringHelperCallback SWIG_csharp_string_callback;
-
-
 typedef std::string FontPath;
 typedef std::string FontFamily;
 typedef std::string FontStyle;

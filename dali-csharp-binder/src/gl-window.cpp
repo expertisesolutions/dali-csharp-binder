@@ -24,10 +24,6 @@
 #include <dali-toolkit/devel-api/controls/control-devel.h>
 #include <dali/integration-api/debug.h>
 
-/* Callback for returning strings to C# without leaking memory */
-typedef char * (SWIGSTDCALL* SWIG_CSharpStringHelperCallback)(const char *);
-extern SWIG_CSharpStringHelperCallback SWIG_csharp_string_callback;
-
 /* TODO Adding signal definition */
 SWIGINTERN bool Dali_Signal_Sl_void_Sp_bool_SP__Sg__Empty(Dali::Signal< void (Dali::GlWindow, bool) > const *self){
   return self->Empty();

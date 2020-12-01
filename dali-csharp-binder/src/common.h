@@ -48,7 +48,13 @@ template <typename T> T SwigValueInit()
 
 #include <stdexcept>
 
-#define SWIGSTDCALL
+#ifndef SWIGSTDCALL
+# if defined(_WIN32) || defined(__WIN32__) || defined(__CYGWIN__)
+#  define SWIGSTDCALL __stdcall
+# else
+#  define SWIGSTDCALL
+# endif
+#endif
 
 /* attribute recognised by some compilers to avoid 'unused' warnings */
 #ifndef SWIGUNUSED
@@ -132,6 +138,7 @@ typedef enum
 typedef void (SWIGSTDCALL* SWIG_CSharpExceptionCallback_t)(const char *);
 typedef void (SWIGSTDCALL* SWIG_CSharpExceptionArgumentCallback_t)(const char *, const char *);
 typedef char * (SWIGSTDCALL* SWIG_CSharpStringHelperCallback)(const char *);
+extern SWIG_CSharpStringHelperCallback SWIG_csharp_string_callback;
 
 typedef struct
 {
@@ -158,8 +165,6 @@ extern void SWIG_CSharpException(int code, const char *msg);
 
 
 #include <stdexcept>
-
-#define SWIGSTDCALL
 
 #include <dali/dali.h>
 #include <dali-toolkit/dali-toolkit.h>

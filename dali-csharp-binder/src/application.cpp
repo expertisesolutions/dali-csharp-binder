@@ -24,10 +24,6 @@
 #include <dali/devel-api/adaptor-framework/application-devel.h>
 #include <dali/integration-api/adaptor-framework/adaptor.h>
 
-/* Callback for returning strings to C# without leaking memory */
-typedef char * (SWIGSTDCALL* SWIG_CSharpStringHelperCallback)(const char *);
-extern SWIG_CSharpStringHelperCallback SWIG_csharp_string_callback;
-
 namespace
 {
 // keep argcs and argv so they're always available to DALi
